@@ -38,7 +38,7 @@ manipulate <- function(x,y,n,p)
   list(x.new=x.new,x.tmp=x.tmp,y.new=y.new,nj.new=nj.new,delete=delete)
 }
 
-SMCP <- function(x,y,alpha,lambda,gamma,eps=1E-20,n.iter=100000)
+SMCP <- function(x,y,alpha,lambda,gamma,eps=1E-20,n.iter=100)
 {
   n <- length(y)
   p <- dim(x)[2]

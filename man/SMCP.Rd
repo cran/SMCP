@@ -1,12 +1,12 @@
 \name{SMCP}
 \alias{SMCP}
 \alias{sp}
-\title{Fit a Linear Model with MCP and Quadratic absolute difference penalties}
+\title{Smoothed minimax concave penalization (SMCP) method for genome-wide association studies.}
 \description{
-  Fit coefficients paths for a linear model with MCP and quadratic absolute difference penalties. Provide cross-validation function to the selection of the tuning parameter.The model is marginalized so that missing values can be accommendated.
+  Fit coefficients paths for a linear model with smoothed minimax concave penalty (SMCP). The model is marginalized so that missing values can be accommendated.
 }
 \usage{
-SMCP(x,y,alpha,lambda,gamma,eps=1e-20,n.iter=100000)
+SMCP(x,y,alpha,lambda,gamma,eps=1e-20,n.iter=100)
 sp(x,y,alpha,n.lambda,lambda.min=ifelse(n>p,.001,.05),gamma)
 }
 
@@ -23,12 +23,10 @@ sp(x,y,alpha,n.lambda,lambda.min=ifelse(n>p,.001,.05),gamma)
 }
 
 \details{
-  The marginalized linear model with MCP and QA penalties is the marginalized least square plus two penalties. 
-   1/(2n)RSS+MCP+QA
-  Here, RSS is the marginalized least squares.
+  The function minimizes 1/(2n)MLS+SMCP, where MLS is the marginalized least squares, SMCP is a smoothed minimax concave penalty.
 }
 \value{
-  An object with S3 class '"uni_marginal_lm"' containing:
+  An object with S3 class '"SMCP"' containing:
   beta: The fitted values of coefficients. 
   w2 : The weights for QA parts computed as adjacent correlation.
 
@@ -36,7 +34,8 @@ sp(x,y,alpha,n.lambda,lambda.min=ifelse(n>p,.001,.05),gamma)
   sp : The solution paths for the lambda from the maximum to the minimum. The number of columns equals the number of coefficients, and the number of rows is equal to 'n.lambda'. The first row is the coefficients for the maximum lambda, and the last row is for the minimum lambda.
 
 }
-\author{Jin Liu}
+\references{Liu, J., Wang, K. , Ma, S. and Huang, J. (2010)  Accouting for linkage disequilibrium in genome-wide association studies:A penalized regression method. Technical report #404, Department of Statistics & Actuarial Science, University of Iowa}
+\author{Jin Liu <jin-liu@uiowa.edu>}
 \examples{
 x=matrix(rnorm(100*20),100,20)
 y=rnorm(100)
